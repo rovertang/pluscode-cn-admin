@@ -19,13 +19,13 @@
 
 ## V2 数据包
 
-从本项目的 [GitHub Releases](https://github.com/rovertang/pluscode-cn-admin/releases) 下载以下文件。代码仓库没有数据库；如果 Release 页面暂未显示这些文件，需等资产上传后再配置需要数据的功能。两个数据包均只包含 **V2** 数据，不含原始 Shapefile 或 V1 数据。
+从本项目的 [v1.0.0 Release](https://github.com/rovertang/pluscode-cn-admin/releases/tag/v1.0.0) 下载以下文件。代码仓库没有数据库，仅克隆代码无法运行需要数据的查询。两个数据包均只包含 **V2** 数据，不含原始 Shapefile 或 V1 数据。
 
 | Release 文件 | ZIP 内文件 | 用途 |
 | --- | --- | --- |
-| `pluscode-admin-v2-sqlite.zip` | `pluscode_admin_v2.sqlite` | Android 构建、Linux SDK 和 Python 本地查询 |
-| `pluscode-admin-v2-redis-kv.zip` | `pluscode_admin_v2.kv.jsonl.gz` | 导入 Redis，供 Web API 查询；不能直接作为 SQLite 数据库打开 |
-| `pluscode-demo-debug.apk` | 无需解压 | 已内置 V2 SQLite 的 Android Demo 安装包 |
+| [pluscode-admin-v2-sqlite.zip](https://github.com/rovertang/pluscode-cn-admin/releases/download/v1.0.0/pluscode-admin-v2-sqlite.zip) | `pluscode_admin_v2.sqlite` | Android 构建、Linux SDK 和 Python 本地查询 |
+| [pluscode-admin-v2-redis-kv.zip](https://github.com/rovertang/pluscode-cn-admin/releases/download/v1.0.0/pluscode-admin-v2-redis-kv.zip) | `pluscode_admin_v2.kv.jsonl.gz` | 导入 Redis，供 Web API 查询；不能直接作为 SQLite 数据库打开 |
+| [pluscode-demo-debug.apk](https://github.com/rovertang/pluscode-cn-admin/releases/download/v1.0.0/pluscode-demo-debug.apk) | 无需解压 | 已内置 V2 SQLite 的 Android Demo 安装包 |
 
 把两个 ZIP 的内容分别解压到**克隆后的仓库根目录**的 `data/processed/v2/`；ZIP 文件本身可留在下载目录。以下示例假定文件下载到了当前用户的 `Downloads`，请按实际位置修改 `$downloadDir`，并从仓库根目录执行：
 
