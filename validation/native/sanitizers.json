@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "script": "scripts/sanitize_core.sh",
+  "instrumented": ["C++ query engine", "C ABI", "OLC", "native contract test"],
+  "sanitizers": ["address", "undefined"],
+  "leak_detection": true,
+  "concurrent_queries": 800,
+  "limitations": "Bundled C dependencies and JNI are not instrumented in this additional test build."
+}

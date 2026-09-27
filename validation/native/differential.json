@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "json_comparisons": 105039,
+  "grid_edge_comparisons": 6000,
+  "blocks_compared": 92174,
+  "corruptions_rejected": [
+    "incomplete",
+    "wrong_format",
+    "missing_tile",
+    "bad_xz",
+    "unknown_id",
+    "bad_span",
+    "bad_directory"
+  ],
+  "database_sha256": "9abaed308d8d1286fd08fe6ab1517d5345198892a5873dfeb2dbd34b0687fe4f",
+  "library_sha256": "87acdde8a47d0cf53504f776e56a0faf96e922a591da6f1a0e5a7dbd97470a76",
+  "elapsed_seconds": 480.066
+}

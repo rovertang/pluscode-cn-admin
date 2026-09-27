@@ -1,0 +1,6 @@
+{
+  global:
+    pcad_*;
+    Java_com_askcodex_pluscode_PlusCodeIndex_*;
+  local: *;
+};

@@ -1,0 +1,68 @@
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/AndroidManifest.xml:3: Warning: The attribute android:allowBackup is deprecated from Android 12 and higher and may be removed in future versions. Consider adding the attribute android:dataExtractionRules specifying an @xml resource which configures cloud backups and device transfers on Android 12 and higher. [DataExtractionRules]
+        android:allowBackup="false" android:supportsRtl="true">
+                             ~~~~~
+
+   Explanation for issues of type "DataExtractionRules":
+   Before Android 12, the attributes android:allowBackup and
+   android:fullBackupContent were used to configure all forms of backup,
+   including cloud backups, device-to-device transfers and adb backup.
+
+   In Android 12 and higher, these attributes have been deprecated and will
+   only apply to cloud backups. You should instead use the attribute
+   android:dataExtractionRules, specifying an @xml resource that configures
+   which files to back up, for cloud backups and for device-to-device
+   transfers, separately. If your minSdkVersion supports older versions,
+   you'll still want to specify an android:fullBackupContent resource if the
+   default behavior is not right for your app.
+
+   https://developer.android.com/about/versions/12/backup-restore#xml-changes
+   https://goo.gle/DataExtractionRules
+
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:53: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            } catch (Throwable error) { post(() -> state.setText("初始化失败：" + error.getMessage())); }
+                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:93: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        byCoordinates.setText("WGS84 经纬度"); byCode.setText("Plus Code"); byCoordinates.setId(View.generateViewId()); byCode.setId(View.generateViewId());
+                              ~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:93: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        byCoordinates.setText("WGS84 经纬度"); byCode.setText("Plus Code"); byCoordinates.setId(View.generateViewId()); byCode.setId(View.generateViewId());
+                                                           ~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:107: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        for(int i=0;i<names.length;i++) { final int n=i; Button b=new Button(this); b.setText(names[i]); b.setTextSize(15); choices.addView(b,new LinearLayout.LayoutParams(0,dp(50),1)); actions.add(b); b.setOnClickListener(v->{byCoordinates.setChecked(true); latitude.setText(""+examples[n][0]); longitude.setText(""+examples[n][1]); query(false,false);}); }
+                                                                                                                                                                                                                                                                                    ~~~~~~~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:107: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        for(int i=0;i<names.length;i++) { final int n=i; Button b=new Button(this); b.setText(names[i]); b.setTextSize(15); choices.addView(b,new LinearLayout.LayoutParams(0,dp(50),1)); actions.add(b); b.setOnClickListener(v->{byCoordinates.setChecked(true); latitude.setText(""+examples[n][0]); longitude.setText(""+examples[n][1]); query(false,false);}); }
+                                                                                                                                                                                                                                                                                                                          ~~~~~~~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:159: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    if(moving&&simulating) {step++;simulationState.setText("模拟行驶  "+step+" / 121 · "+String.format(Locale.ROOT,"%.4f, %.4f",lat,lng)); if(step<=120) ui.postDelayed(tick,650); else stopSimulation();}
+                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:159: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    if(moving&&simulating) {step++;simulationState.setText("模拟行驶  "+step+" / 121 · "+String.format(Locale.ROOT,"%.4f, %.4f",lat,lng)); if(step<=120) ui.postDelayed(tick,650); else stopSimulation();}
+                                                                                         ~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:169: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        codeResult.setText("Plus Code   "+value(r.plusCode));
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:169: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        codeResult.setText("Plus Code   "+value(r.plusCode));
+                           ~~~~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:170: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        detail.setText((r.isMatched()?"行政区码  "+value(r.admin.countyCode)+"\n":"")+"命中网格  "+value(r.matchedPlusCode)+"\n边界网格  "+(r.boundaryCell?"是":"否")+"    源数据重叠  "+(r.sourceOverlap?"是":"否"));
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt/codex-native/Dev/shengshixian4pluscode/android-demo/project/app/src/main/java/com/askcodex/pluscodedemo/MainActivity.java:178: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+    private void showError(Exception e) {state.setText("查询失败："+value(e.getMessage())); region.setText("输入或查询异常");hierarchy.setText("");detail.setText("");codeResult.setText("");timing.setText("");lastJson="{}";}
+                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+0 errors, 12 warnings

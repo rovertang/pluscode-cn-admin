@@ -1,0 +1,67 @@
+INSTRUMENTATION_STATUS_CODE: 0
+
+PASS: 14 JNI checks; four cities; Plus Code; cache clear; simulation; app-window captures.
+{
+  "passed": true,
+  "device": "msmnile_gvmq for arm64",
+  "sdk": 33,
+  "database_sha256": "9abaed308d8d1286fd08fe6ab1517d5345198892a5873dfeb2dbd34b0687fe4f",
+  "cases": [
+    {
+      "name": "open_without_loading_blocks",
+      "passed": true
+    },
+    {
+      "name": "coordinate_0",
+      "passed": true
+    },
+    {
+      "name": "pluscode_roundtrip_0",
+      "passed": true
+    },
+    {
+      "name": "coordinate_1",
+      "passed": true
+    },
+    {
+      "name": "pluscode_roundtrip_1",
+      "passed": true
+    },
+    {
+      "name": "coordinate_2",
+      "passed": true
+    },
+    {
+      "name": "pluscode_roundtrip_2",
+      "passed": true
+    },
+    {
+      "name": "coordinate_3",
+      "passed": true
+    },
+    {
+      "name": "pluscode_roundtrip_3",
+      "passed": true
+    },
+    {
+      "name": "outside_coverage",
+      "passed": true
+    },
+    {
+      "name": "invalid_coordinate",
+      "passed": true
+    },
+    {
+      "name": "invalid_pluscode",
+      "passed": true
+    },
+    {
+      "name": "bounded_prefetch",
+      "passed": true
+    },
+    {
+      "name": "clear_cache",
+      "passed": true
+    }
+  ]
+}

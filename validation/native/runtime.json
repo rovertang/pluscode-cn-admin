@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "libc": [
+    "glibc",
+    "2.43"
+  ],
+  "java": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n",
+  "native_contract": true,
+  "java_xcheck_jni": true,
+  "external_gcc_cpp": true,
+  "external_gcc_c": true,
+  "kotlin_compiled_and_executed": true,
+  "tested_artifacts": {
+    "output/sdk/java/pluscode-admin-1.0.0.jar": "8f59e503ed86144e9087b320af510f2baf97356f97cd4ff603ee5b2b04f94784",
+    "output/sdk/linux-x86_64/lib/libpluscode_admin.so": "87acdde8a47d0cf53504f776e56a0faf96e922a591da6f1a0e5a7dbd97470a76"
+  }
+}

@@ -1,0 +1,4 @@
+plugins { id 'com.android.application' version '8.7.3' apply false }
+def work = providers.environmentVariable('DEMO_BUILD_ROOT').orElse(
+    new File(System.getProperty('java.io.tmpdir'), 'shengshixian4pluscode-android/build').absolutePath).get()
+allprojects { layout.buildDirectory = file("${work}/${project.name}") }

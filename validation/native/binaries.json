@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "elf": [
+    {
+      "path": "output/sdk/linux-x86_64/lib/libpluscode_admin.so",
+      "bytes": 2131208,
+      "sha256": "87acdde8a47d0cf53504f776e56a0faf96e922a591da6f1a0e5a7dbd97470a76",
+      "machine": 62,
+      "bits": 64,
+      "load_alignments": [
+        4096,
+        4096,
+        4096,
+        4096
+      ],
+      "needed": [
+        "libm.so.6",
+        "libpthread.so.0",
+        "libc.so.6",
+        "libdl.so.2",
+        "ld-linux-x86-64.so.2"
+      ],
+      "glibc_versions": [
+        "GLIBC_2.2.5",
+        "GLIBC_2.3",
+        "GLIBC_2.3.2",
+        "GLIBC_2.3.3",
+        "GLIBC_2.7",
+        "GLIBC_2.14",
+        "GLIBC_2.16",
+        "GLIBC_2.28"
+      ],
+      "required_exports_verified": 19
+    },
+    {
+      "path": "output/sdk/android/jniLibs/arm64-v8a/libpluscode_admin.so",
+      "bytes": 1827808,
+      "sha256": "72f30ba9cde1ff6ca1245521edb1cd0642f9ac2421d76e3d6475a50afe3a8738",
+      "machine": 183,
+      "bits": 64,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "needed": [
+        "libdl.so",
+        "libm.so",
+        "libc.so"
+      ],
+      "glibc_versions": [],
+      "required_exports_verified": 19
+    },
+    {
+      "path": "output/sdk/android/jniLibs/x86_64/libpluscode_admin.so",
+      "bytes": 1850720,
+      "sha256": "0a06ff8bd78a381477f97332b9683b3c34066cb4648a6fe233ca6517a7d84157",
+      "machine": 62,
+      "bits": 64,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "needed": [
+        "libdl.so",
+        "libm.so",
+        "libc.so"
+      ],
+      "glibc_versions": [],
+      "required_exports_verified": 19
+    },
+    {
+      "path": "output/sdk/android/jniLibs/armeabi-v7a/libpluscode_admin.so",
+      "bytes": 1235344,
+      "sha256": "d53f71b5c8337f1c45339c8e8886e2a8af2ed70eaa9d59e3fb4f89e2a7071761",
+      "machine": 40,
+      "bits": 32,
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ],
+      "needed": [
+        "libdl.so",
+        "libm.so",
+        "libc.so"
+      ],
+      "glibc_versions": [],
+      "required_exports_verified": 19
+    }
+  ],
+  "java_class_versions": {
+    "com/askcodex/pluscode/PlusCodeIndex$Admin.class": 52,
+    "com/askcodex/pluscode/PlusCodeIndex$Result.class": 52,
+    "com/askcodex/pluscode/PlusCodeIndex.class": 52
+  },
+  "android_device_runtime_tested": false
+}

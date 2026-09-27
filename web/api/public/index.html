@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlusCode Admin v2 - Web Demo</title>
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- OpenLocationCode JS -->
+    <script src="https://cdn.jsdelivr.net/npm/open-location-code@1.0.4/openlocationcode.min.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 320px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        h2 { margin-top: 0; font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .data-row { margin-bottom: 10px; }
+        .data-label { font-size: 12px; color: #666; text-transform: uppercase; }
+        .data-value { font-size: 14px; font-weight: 500; word-break: break-all; }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .bg-matched { background-color: #10B981; }
+        .bg-ambiguous { background-color: #F59E0B; }
+        .bg-outside { background-color: #EF4444; }
+        #loading { display: none; color: #2563EB; font-weight: bold; font-size: 14px; margin-bottom: 10px; }
+        #latency { font-size: 12px; color: #999; margin-top: 20px; text-align: right; }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="panel">
+    <h2>查询结果</h2>
+    <div id="loading">查询中...</div>
+    <div id="result-container" style="display: none;">
+        <div class="data-row">
+            <div class="data-label">状态 (Status)</div>
+            <div class="data-value"><span id="res-status" class="badge"></span></div>
+        </div>
+        <div class="data-row">
+            <div class="data-label">经纬度 (Lat, Lng)</div>
+            <div class="data-value" id="res-latlng"></div>
+        </div>
+        <div class="data-row">
+            <div class="data-label">Plus Code</div>
+            <div class="data-value" id="res-code"></div>
+        </div>
+        <div class="data-row">
+            <div class="data-label">省市区 (Admin)</div>
+            <div class="data-value" id="res-admin"></div>
+        </div>
+        <div class="data-row">
+            <div class="data-label">匹配网格 (Matched Cell)</div>
+            <div class="data-value" id="res-matched-code"></div>
+        </div>
+        <div class="data-row">
+            <div class="data-label">解析策略 (Assignment)</div>
+            <div class="data-value" id="res-assignment"></div>
+        </div>
+        <div id="latency"></div>
+    </div>
+    <div id="placeholder" style="color: #666; font-size: 14px;">点击地图任意位置进行查询</div>
+</div>
+
+<script>
+    // Initialize map centered at China
+    const map = L.map('map').setView([35.8617, 104.1954], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    let currentMarker = null;
+    let currentRect = null;
+
+    map.on('click', async (e) => {
+        const lat = e.latlng.lat;
+        const lng = e.latlng.lng;
+
+        // Update marker
+        if (currentMarker) {
+            currentMarker.setLatLng(e.latlng);
+        } else {
+            currentMarker = L.marker(e.latlng).addTo(map);
+        }
+
+        // Show loading
+        document.getElementById('placeholder').style.display = 'none';
+        document.getElementById('result-container').style.display = 'none';
+        document.getElementById('loading').style.display = 'block';
+
+        try {
+            const response = await fetch(`/api/query?lat=${lat}&lng=${lng}`);
+            const json = await response.json();
+
+            if (json.status === 'success') {
+                displayResult(lat, lng, json.data, json.debug.latency_ms);
+            } else {
+                alert('API 错误: ' + json.message);
+            }
+        } catch (err) {
+            console.error(err);
+            alert('网络请求失败');
+        } finally {
+            document.getElementById('loading').style.display = 'none';
+        }
+    });
+
+    function displayResult(lat, lng, data, latency) {
+        document.getElementById('result-container').style.display = 'block';
+
+        // Status Badge
+        const statusEl = document.getElementById('res-status');
+        statusEl.textContent = data.status;
+        statusEl.className = 'badge';
+        if (data.status === 'matched') statusEl.classList.add('bg-matched');
+        else if (data.status === 'ambiguous') statusEl.classList.add('bg-ambiguous');
+        else statusEl.classList.add('bg-outside');
+
+        // Lat/Lng & Code
+        document.getElementById('res-latlng').textContent = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+        document.getElementById('res-code').textContent = data.pluscode;
+
+        // Admin
+        const adminEl = document.getElementById('res-admin');
+        if (data.status === 'matched' && data.admin) {
+            const a = data.admin;
+            adminEl.textContent = `${a.province || ''} ${a.city || ''} ${a.county || ''}`;
+        } else if (data.status === 'ambiguous' && data.sampled_candidates) {
+            const candidates = data.sampled_candidates.map(a => `${a.province || ''} ${a.county || ''}`).join(' / ');
+            adminEl.textContent = `候选: ${candidates}`;
+        } else {
+            adminEl.textContent = '无 (Outside Coverage)';
+        }
+
+        document.getElementById('res-matched-code').textContent = data.matched_pluscode || '-';
+        document.getElementById('res-assignment').textContent = data.assignment || data.candidate_semantics || '-';
+        document.getElementById('latency').textContent = `耗时: ${latency} ms`;
+
+        // Draw bounding box of the matched cell if available
+        if (currentRect) {
+            map.removeLayer(currentRect);
+            currentRect = null;
+        }
+
+        if (data.matched_pluscode && data.matched_pluscode !== '-') {
+            try {
+                const olc = new OpenLocationCode();
+                const area = olc.decode(data.matched_pluscode);
+                const bounds = [[area.latitudeLo, area.longitudeLo], [area.latitudeHi, area.longitudeHi]];
+
+                let color = '#10B981'; // Green for matched
+                if (data.status === 'ambiguous') color = '#F59E0B'; // Orange
+                if (data.boundary_cell) color = '#3B82F6'; // Blue for boundary cell evaluation
+
+                currentRect = L.rectangle(bounds, {color: color, weight: 2, fillOpacity: 0.2}).addTo(map);
+            } catch (e) {
+                console.error("OLC decode error on frontend:", e);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
